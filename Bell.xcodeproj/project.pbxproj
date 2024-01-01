@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B600618B2B41C9FC0099DA39 /* BellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618A2B41C9FC0099DA39 /* BellApp.swift */; };
+		B600618B2B41C9FC0099DA39 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618A2B41C9FC0099DA39 /* App.swift */; };
 		B600618D2B41C9FC0099DA39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618C2B41C9FC0099DA39 /* ContentView.swift */; };
 		B600618F2B41C9FC0099DA39 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618E2B41C9FC0099DA39 /* Item.swift */; };
 		B60061912B41C9FD0099DA39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B60061902B41C9FD0099DA39 /* Assets.xcassets */; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		B60061872B41C9FC0099DA39 /* Bell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bell.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B600618A2B41C9FC0099DA39 /* BellApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellApp.swift; sourceTree = "<group>"; };
+		B600618A2B41C9FC0099DA39 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B600618C2B41C9FC0099DA39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B600618E2B41C9FC0099DA39 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B60061902B41C9FD0099DA39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,11 +96,12 @@
 		B60061892B41C9FC0099DA39 /* Bell */ = {
 			isa = PBXGroup;
 			children = (
-				B600618A2B41C9FC0099DA39 /* BellApp.swift */,
-				B600618C2B41C9FC0099DA39 /* ContentView.swift */,
-				B600618E2B41C9FC0099DA39 /* Item.swift */,
-				B60061902B41C9FD0099DA39 /* Assets.xcassets */,
-				B60061922B41C9FD0099DA39 /* Preview Content */,
+				B60061BB2B41D5600099DA39 /* App */,
+				B60061B62B41D44E0099DA39 /* Domain */,
+				B60061B82B41D4770099DA39 /* Infra */,
+				B60061B92B41D4870099DA39 /* Interface */,
+				B60061C22B41DAC00099DA39 /* Presentation */,
+				B60061BA2B41D4BD0099DA39 /* Usecase */,
 			);
 			path = Bell;
 			sourceTree = "<group>";
@@ -128,6 +129,117 @@
 				B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */,
 			);
 			path = BellUITests;
+			sourceTree = "<group>";
+		};
+		B60061B62B41D44E0099DA39 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B60061B72B41D4550099DA39 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		B60061B72B41D4550099DA39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B600618E2B41C9FC0099DA39 /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B60061B82B41D4770099DA39 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				B60061BE2B41D8090099DA39 /* Repository */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		B60061B92B41D4870099DA39 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				B60061BD2B41D7A80099DA39 /* Presenter */,
+				B60061BC2B41D79B0099DA39 /* Controller */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		B60061BA2B41D4BD0099DA39 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				B60061C12B41D84A0099DA39 /* Service */,
+				B60061C02B41D83F0099DA39 /* Repository */,
+				B60061BF2B41D8370099DA39 /* Presenter */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		B60061BB2B41D5600099DA39 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B600618A2B41C9FC0099DA39 /* App.swift */,
+				B60061902B41C9FD0099DA39 /* Assets.xcassets */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B60061BC2B41D79B0099DA39 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B60061BD2B41D7A80099DA39 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B60061BE2B41D8090099DA39 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B60061BF2B41D8370099DA39 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B60061C02B41D83F0099DA39 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		B60061C12B41D84A0099DA39 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B60061C22B41DAC00099DA39 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B60061922B41C9FD0099DA39 /* Preview Content */,
+				B60061C32B4245600099DA39 /* Screens */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B60061C32B4245600099DA39 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B600618C2B41C9FC0099DA39 /* ContentView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +374,7 @@
 			files = (
 				B600618D2B41C9FC0099DA39 /* ContentView.swift in Sources */,
 				B600618F2B41C9FC0099DA39 /* Item.swift in Sources */,
-				B600618B2B41C9FC0099DA39 /* BellApp.swift in Sources */,
+				B600618B2B41C9FC0099DA39 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +537,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Bell/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Bell/Presentation/Preview Content\"";
 				DEVELOPMENT_TEAM = B8PR34D6DP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -434,6 +546,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,7 +567,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Bell/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Bell/Presentation/Preview Content\"";
 				DEVELOPMENT_TEAM = B8PR34D6DP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -463,6 +576,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

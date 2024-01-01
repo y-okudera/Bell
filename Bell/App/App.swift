@@ -1,5 +1,5 @@
 //
-//  BellApp.swift
+//  App.swift
 //  Bell
 //
 //  Created by Yuki Okudera on 2024/01/01.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct BellApp: App {
+struct App: SwiftUI.App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
