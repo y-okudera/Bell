@@ -1,0 +1,30 @@
+{
+  "schemaNamespace" : "GitHub",
+  "input" : {
+    "operationSearchPaths" : [
+      "./Sources/GraphQL/Documents/**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "./Sources/GraphQL/Schemas/**/*.graphql*"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./Sources/GraphQL/Generated",
+      "moduleType" : {
+        "embeddedInTarget" : {
+          "name" : "GraphQL",
+          "accessModifier" : "public"
+        }
+      }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  }
+}

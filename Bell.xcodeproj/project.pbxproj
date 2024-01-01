@@ -15,6 +15,7 @@
 		B600619E2B41C9FE0099DA39 /* BellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600619D2B41C9FE0099DA39 /* BellTests.swift */; };
 		B60061A82B41C9FE0099DA39 /* BellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A72B41C9FE0099DA39 /* BellUITests.swift */; };
 		B60061AA2B41C9FE0099DA39 /* BellUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */; };
+		B66BAFE42B42A453001F4F40 /* GraphQL in Frameworks */ = {isa = PBXBuildFile; productRef = B66BAFE32B42A453001F4F40 /* GraphQL */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		B60061A32B41C9FE0099DA39 /* BellUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BellUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B60061A72B41C9FE0099DA39 /* BellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITests.swift; sourceTree = "<group>"; };
 		B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B60061CB2B4262E60099DA39 /* GraphQL */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GraphQL; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B66BAFE42B42A453001F4F40 /* GraphQL in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,8 @@
 				B60061892B41C9FC0099DA39 /* Bell */,
 				B600619C2B41C9FE0099DA39 /* BellTests */,
 				B60061A62B41C9FE0099DA39 /* BellUITests */,
+				B60061CC2B42841C0099DA39 /* Frameworks */,
+				B60061C82B4257450099DA39 /* Packages */,
 				B60061882B41C9FC0099DA39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -242,6 +247,21 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		B60061C82B4257450099DA39 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				B60061CB2B4262E60099DA39 /* GraphQL */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		B60061CC2B42841C0099DA39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -258,6 +278,9 @@
 			dependencies = (
 			);
 			name = Bell;
+			packageProductDependencies = (
+				B66BAFE32B42A453001F4F40 /* GraphQL */,
+			);
 			productName = Bell;
 			productReference = B60061872B41C9FC0099DA39 /* Bell.app */;
 			productType = "com.apple.product-type.application";
@@ -706,6 +729,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B66BAFE32B42A453001F4F40 /* GraphQL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GraphQL;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B600617F2B41C9FC0099DA39 /* Project object */;
 }
