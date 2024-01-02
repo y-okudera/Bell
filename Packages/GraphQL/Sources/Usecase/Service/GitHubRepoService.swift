@@ -7,7 +7,7 @@
 
 import Combine
 import GraphQL_Dependency
-import Domain
+import GraphQL_Domain
 import Foundation
 
 public protocol GitHubRepoService {

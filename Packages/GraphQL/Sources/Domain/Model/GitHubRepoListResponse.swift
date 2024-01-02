@@ -77,7 +77,7 @@ extension GitHubRepoListResponse.Edge {
     /// Search.Edge.Node
     ///
     /// Parent Type: `SearchResultItem`
-    public struct Node {
+    public struct Node: Hashable {
         /// The description of the repository.
         public let description: String?
         /// The repository's URL.
@@ -113,7 +113,7 @@ extension GitHubRepoListResponse.Edge.Node {
     /// Search.Edge.Node.AsRepository.Owner
     ///
     /// Parent Type: `RepositoryOwner`
-    public struct Owner {
+    public struct Owner: Hashable {
         /// A URL pointing to the owner's public avatar.
         public let avatarUrl: URL?
 
@@ -125,7 +125,7 @@ extension GitHubRepoListResponse.Edge.Node {
     /// Search.Edge.Node.AsRepository.Stargazers
     ///
     /// Parent Type: `StargazerConnection`
-    public struct Stargazers {
+    public struct Stargazers: Hashable {
         /// Identifies the total count of items in the connection.
         public let totalCount: Int
 
@@ -137,7 +137,7 @@ extension GitHubRepoListResponse.Edge.Node {
     /// Search.Edge.Node.AsRepository.PrimaryLanguage
     ///
     /// Parent Type: `Language`
-    public struct PrimaryLanguage {
+    public struct PrimaryLanguage: Hashable {
         /// The name of the current language.
         public let name: String
 

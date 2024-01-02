@@ -8,8 +8,8 @@
 import Apollo
 import ApolloAPI
 import Combine
-import Domain
 import Foundation
+import GraphQL_Domain
 
 final class DataCoordinator {
 
@@ -38,7 +38,7 @@ final class DataCoordinator {
         contextIdentifier: UUID? = nil,
         context: RequestContext? = nil,
         queue: DispatchQueue = .main
-    ) -> Future<Query.Data, Domain.GraphQLError> {
+    ) -> Future<Query.Data, GraphQL_Domain.GraphQLError> {
         return Future() { promise in
             self.apolloClient.fetch(query: query) { result in
                 switch result {

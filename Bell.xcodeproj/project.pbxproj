@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		B600618B2B41C9FC0099DA39 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618A2B41C9FC0099DA39 /* App.swift */; };
-		B600618D2B41C9FC0099DA39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618C2B41C9FC0099DA39 /* ContentView.swift */; };
-		B600618F2B41C9FC0099DA39 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600618E2B41C9FC0099DA39 /* Item.swift */; };
 		B60061912B41C9FD0099DA39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B60061902B41C9FD0099DA39 /* Assets.xcassets */; };
 		B60061942B41C9FD0099DA39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B60061932B41C9FD0099DA39 /* Preview Assets.xcassets */; };
 		B600619E2B41C9FE0099DA39 /* BellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B600619D2B41C9FE0099DA39 /* BellTests.swift */; };
 		B60061A82B41C9FE0099DA39 /* BellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A72B41C9FE0099DA39 /* BellUITests.swift */; };
 		B60061AA2B41C9FE0099DA39 /* BellUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */; };
+		B6659D4C2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6659D4B2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift */; };
+		B6659D4E2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6659D4D2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift */; };
+		B6659D502B448361002CBF38 /* SearchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6659D4F2B448361002CBF38 /* SearchContentView.swift */; };
 		B66BAFE42B42A453001F4F40 /* GraphQL in Frameworks */ = {isa = PBXBuildFile; productRef = B66BAFE32B42A453001F4F40 /* GraphQL */; };
-		B66BAFE62B432E3A001F4F40 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BAFE52B432E3A001F4F40 /* ViewModel.swift */; };
 		B680EEB62B43B210005017F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680EEB52B43B210005017F1 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +40,6 @@
 /* Begin PBXFileReference section */
 		B60061872B41C9FC0099DA39 /* Bell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B600618A2B41C9FC0099DA39 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		B600618C2B41C9FC0099DA39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B600618E2B41C9FC0099DA39 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B60061902B41C9FD0099DA39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B60061932B41C9FD0099DA39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B60061992B41C9FE0099DA39 /* BellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +48,9 @@
 		B60061A72B41C9FE0099DA39 /* BellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITests.swift; sourceTree = "<group>"; };
 		B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B60061CB2B4262E60099DA39 /* GraphQL */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GraphQL; sourceTree = "<group>"; };
-		B66BAFE52B432E3A001F4F40 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B6659D4B2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoSearchScreenView.swift; sourceTree = "<group>"; };
+		B6659D4D2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoSearchViewModel.swift; sourceTree = "<group>"; };
+		B6659D4F2B448361002CBF38 /* SearchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchContentView.swift; sourceTree = "<group>"; };
 		B680EEB52B43B210005017F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				B60061BB2B41D5600099DA39 /* App */,
-				B60061B62B41D44E0099DA39 /* Domain */,
 				B60061C22B41DAC00099DA39 /* Presentation */,
 			);
 			path = Bell;
@@ -137,22 +136,6 @@
 			path = BellUITests;
 			sourceTree = "<group>";
 		};
-		B60061B62B41D44E0099DA39 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				B60061B72B41D4550099DA39 /* Model */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		B60061B72B41D4550099DA39 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B600618E2B41C9FC0099DA39 /* Item.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		B60061BB2B41D5600099DA39 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,8 +158,7 @@
 		B60061C32B4245600099DA39 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				B600618C2B41C9FC0099DA39 /* ContentView.swift */,
-				B66BAFE52B432E3A001F4F40 /* ViewModel.swift */,
+				B6659D4A2B4456FC002CBF38 /* GitHubRepoSearch */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -194,6 +176,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6659D4A2B4456FC002CBF38 /* GitHubRepoSearch */ = {
+			isa = PBXGroup;
+			children = (
+				B6659D4B2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift */,
+				B6659D4D2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift */,
+				B6659D4F2B448361002CBF38 /* SearchContentView.swift */,
+			);
+			path = GitHubRepoSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,11 +321,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B600618D2B41C9FC0099DA39 /* ContentView.swift in Sources */,
-				B600618F2B41C9FC0099DA39 /* Item.swift in Sources */,
-				B66BAFE62B432E3A001F4F40 /* ViewModel.swift in Sources */,
+				B6659D502B448361002CBF38 /* SearchContentView.swift in Sources */,
 				B680EEB62B43B210005017F1 /* AppDelegate.swift in Sources */,
+				B6659D4E2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift in Sources */,
 				B600618B2B41C9FC0099DA39 /* App.swift in Sources */,
+				B6659D4C2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
