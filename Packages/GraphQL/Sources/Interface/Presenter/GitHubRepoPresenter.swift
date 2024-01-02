@@ -8,10 +8,11 @@
 import Domain
 import Foundation
 import GraphQL
-import Usecase
+import GraphQL_Usecase
 
-struct GitHubRepoPresenter: Usecase.GitHubRepoPresenter {
-    func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoListResponse {
+public struct GitHubRepoPresenter: GraphQL_Usecase.GitHubRepoPresenter {
+    public init() {}
+    public func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoListResponse {
         .init(data)
     }
 }

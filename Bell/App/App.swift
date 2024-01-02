@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct App: SwiftUI.App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,

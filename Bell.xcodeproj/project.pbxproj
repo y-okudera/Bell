@@ -16,6 +16,8 @@
 		B60061A82B41C9FE0099DA39 /* BellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A72B41C9FE0099DA39 /* BellUITests.swift */; };
 		B60061AA2B41C9FE0099DA39 /* BellUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */; };
 		B66BAFE42B42A453001F4F40 /* GraphQL in Frameworks */ = {isa = PBXBuildFile; productRef = B66BAFE32B42A453001F4F40 /* GraphQL */; };
+		B66BAFE62B432E3A001F4F40 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BAFE52B432E3A001F4F40 /* ViewModel.swift */; };
+		B680EEB62B43B210005017F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680EEB52B43B210005017F1 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		B60061A72B41C9FE0099DA39 /* BellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITests.swift; sourceTree = "<group>"; };
 		B60061A92B41C9FE0099DA39 /* BellUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B60061CB2B4262E60099DA39 /* GraphQL */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GraphQL; sourceTree = "<group>"; };
+		B66BAFE52B432E3A001F4F40 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B680EEB52B43B210005017F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +107,7 @@
 			children = (
 				B60061BB2B41D5600099DA39 /* App */,
 				B60061B62B41D44E0099DA39 /* Domain */,
-				B60061B82B41D4770099DA39 /* Infra */,
-				B60061B92B41D4870099DA39 /* Interface */,
 				B60061C22B41DAC00099DA39 /* Presentation */,
-				B60061BA2B41D4BD0099DA39 /* Usecase */,
 			);
 			path = Bell;
 			sourceTree = "<group>";
@@ -152,82 +153,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B60061B82B41D4770099DA39 /* Infra */ = {
-			isa = PBXGroup;
-			children = (
-				B60061BE2B41D8090099DA39 /* Repository */,
-			);
-			path = Infra;
-			sourceTree = "<group>";
-		};
-		B60061B92B41D4870099DA39 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				B60061BD2B41D7A80099DA39 /* Presenter */,
-				B60061BC2B41D79B0099DA39 /* Controller */,
-			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
-		B60061BA2B41D4BD0099DA39 /* Usecase */ = {
-			isa = PBXGroup;
-			children = (
-				B60061C12B41D84A0099DA39 /* Service */,
-				B60061C02B41D83F0099DA39 /* Repository */,
-				B60061BF2B41D8370099DA39 /* Presenter */,
-			);
-			path = Usecase;
-			sourceTree = "<group>";
-		};
 		B60061BB2B41D5600099DA39 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				B600618A2B41C9FC0099DA39 /* App.swift */,
+				B680EEB52B43B210005017F1 /* AppDelegate.swift */,
 				B60061902B41C9FD0099DA39 /* Assets.xcassets */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		B60061BC2B41D79B0099DA39 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B60061BD2B41D7A80099DA39 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		B60061BE2B41D8090099DA39 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		B60061BF2B41D8370099DA39 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		B60061C02B41D83F0099DA39 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		B60061C12B41D84A0099DA39 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		B60061C22B41DAC00099DA39 /* Presentation */ = {
@@ -243,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				B600618C2B41C9FC0099DA39 /* ContentView.swift */,
+				B66BAFE52B432E3A001F4F40 /* ViewModel.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -397,6 +331,8 @@
 			files = (
 				B600618D2B41C9FC0099DA39 /* ContentView.swift in Sources */,
 				B600618F2B41C9FC0099DA39 /* Item.swift in Sources */,
+				B66BAFE62B432E3A001F4F40 /* ViewModel.swift in Sources */,
+				B680EEB62B43B210005017F1 /* AppDelegate.swift in Sources */,
 				B600618B2B41C9FC0099DA39 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,7 +12,8 @@ let package = Package(
         .library(
             name: "GraphQL",
             targets: [
-                "Usecase",
+                "GraphQL.Infra",
+                "GraphQL.Interface",
             ]
         ),
     ],
@@ -24,9 +25,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Domain",
-            dependencies: [
-            ]
+            name: "Domain"
         ),
         .target(
             name: "GraphQL",
@@ -35,33 +34,43 @@ let package = Package(
             ]
         ),
         .target(
-            name: "Infra",
+            name: "GraphQL.Dependency",
+            path: "Sources/Dependency"
+        ),
+        .target(
+            name: "GraphQL.Infra",
             dependencies: [
                 "Domain",
                 "GraphQL",
-                "Usecase",
+                "GraphQL.Dependency",
+                "GraphQL.Usecase",
                 .product(name: "Apollo", package: "apollo-ios"),
-            ]
+            ],
+            path: "Sources/Infra"
         ),
         .target(
-            name: "Interface",
+            name: "GraphQL.Interface",
             dependencies: [
                 "Domain",
-                "Usecase",
+                "GraphQL.Dependency",
+                "GraphQL.Usecase",
                 .product(name: "Apollo", package: "apollo-ios"),
-            ]
+            ],
+            path: "Sources/Interface"
         ),
         .target(
-            name: "Usecase",
+            name: "GraphQL.Usecase",
             dependencies: [
                 "Domain",
                 "GraphQL",
-            ]
+                "GraphQL.Dependency",
+            ],
+            path: "Sources/Usecase"
         ),
         .testTarget(
             name: "UsecaseTests",
             dependencies: [
-                "Usecase",
+                "GraphQL.Usecase",
             ]
         ),
     ]

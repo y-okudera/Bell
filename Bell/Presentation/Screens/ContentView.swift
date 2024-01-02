@@ -12,6 +12,8 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
 
+    @ObservedObject var viewModel: ViewModel = .init()
+
     var body: some View {
         NavigationSplitView {
             List {
@@ -36,6 +38,9 @@ struct ContentView: View {
             }
         } detail: {
             Text("Select an item")
+        }
+        .onAppear {
+            viewModel.searchGitHubRepo()
         }
     }
 

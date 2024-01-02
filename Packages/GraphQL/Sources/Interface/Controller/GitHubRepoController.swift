@@ -6,24 +6,23 @@
 //
 
 import Combine
+import GraphQL_Dependency
 import Domain
 import Foundation
-import Usecase
+import GraphQL_Usecase
 
-protocol GitHubRepoController {
-    var gitHubRepoService: GitHubRepoService { get }
-
+public protocol GitHubRepoController {
     func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError>
 }
 
-struct GitHubRepoControllerImpl: GitHubRepoController {
-    let gitHubRepoService: GitHubRepoService
+public struct GitHubRepoControllerImpl: GitHubRepoController {
 
-    init(gitHubRepoService: GitHubRepoService) {
-        self.gitHubRepoService = gitHubRepoService
-    }
+    @Inject
+    var gitHubRepoService: GitHubRepoService
 
-    func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError> {
-        gitHubRepoService.listGitHubRepo(input: input)
+    public init() {}
+
+    public func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError> {
+        self.gitHubRepoService.listGitHubRepo(input: input)
     }
 }

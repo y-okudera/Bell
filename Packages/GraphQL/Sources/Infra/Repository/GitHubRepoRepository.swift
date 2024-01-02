@@ -10,10 +10,11 @@ import Combine
 import Domain
 import Foundation
 import GraphQL
-import Usecase
+import GraphQL_Usecase
 
-struct GitHubRepoRepository: Usecase.GitHubRepoRepository {
-    func listGitHubRepo(input: GitHubRepoFilterInput) -> Future<GitHub.ListRepoQuery.Data, Domain.GraphQLError> {
+public struct GitHubRepoRepository: GraphQL_Usecase.GitHubRepoRepository {
+    public init() {}
+    public func listGitHubRepo(input: GitHubRepoFilterInput) -> Future<GitHub.ListRepoQuery.Data, Domain.GraphQLError> {
         let query = GitHub.ListRepoQuery(
             after: input.after != nil ? GraphQLNullable<String>.some(input.after!) : GraphQLNullable<String>.null,
             before: input.before != nil ? GraphQLNullable<String>.some(input.before!) : GraphQLNullable<String>.null,
