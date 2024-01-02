@@ -6,9 +6,9 @@
 //
 
 import Combine
-import Domain
 import Foundation
 import GraphQL
+import GraphQL_Domain
 import GraphQL_Usecase
 
 public struct GitHubRepoRepository: GraphQL_Usecase.GitHubRepoRepository {

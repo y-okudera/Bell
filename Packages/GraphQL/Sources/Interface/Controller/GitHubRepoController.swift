@@ -6,9 +6,9 @@
 //
 
 import Combine
-import GraphQL_Dependency
-import Domain
 import Foundation
+import GraphQL_Dependency
+import GraphQL_Domain
 import GraphQL_Usecase
 
 public protocol GitHubRepoController {
