@@ -37,8 +37,9 @@ struct SearchContentView: View {
                 Text("No repositories found.\nPlease try searching with another keyword.")
             } else {
                 List {
-                    ForEach(self.viewModel.data, id: \.self) { data in
+                    ForEach(self.viewModel.data, id: \.id) { data in
                         RepositoryListItem(repository: data)
+                            .listRowInsets(EdgeInsets())
                             .onAppear {
                                 self.viewModel.onAppearItem(itemData: data)
                             }

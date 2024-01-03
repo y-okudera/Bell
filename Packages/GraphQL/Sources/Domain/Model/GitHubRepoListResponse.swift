@@ -78,6 +78,10 @@ extension GitHubRepoListResponse.Edge {
     ///
     /// Parent Type: `SearchResultItem`
     public struct Node: Hashable {
+        /// The Node ID of the Repository object
+        public let id: String
+        /// The HTTP URL for this repository
+        public let url: URL?
         /// The description of the repository.
         public let description: String?
         /// The repository's URL.
@@ -92,6 +96,8 @@ extension GitHubRepoListResponse.Edge {
         public let primaryLanguage: PrimaryLanguage?
 
         public init(
+            id: String,
+            url: URL?,
             description: String?,
             homepageUrl: URL?,
             nameWithOwner: String,
@@ -99,6 +105,8 @@ extension GitHubRepoListResponse.Edge {
             stargazers: Stargazers,
             primaryLanguage: PrimaryLanguage?
         ) {
+            self.id = id
+            self.url = url
             self.description = description
             self.homepageUrl = homepageUrl
             self.nameWithOwner = nameWithOwner
