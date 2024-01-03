@@ -22,6 +22,7 @@
 		B6D200B02B450D1600797816 /* AlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200AF2B450D1600797816 /* AlertModifier.swift */; };
 		B6D200B32B45244700797816 /* RepositoryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B22B45244700797816 /* RepositoryListItem.swift */; };
 		B6D200B52B456D6300797816 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B42B456D6300797816 /* CircularProgressView.swift */; };
+		B6D200B92B457E4A00797816 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B82B457E4A00797816 /* CachedAsyncImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		B6D200AF2B450D1600797816 /* AlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModifier.swift; sourceTree = "<group>"; };
 		B6D200B22B45244700797816 /* RepositoryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListItem.swift; sourceTree = "<group>"; };
 		B6D200B42B456D6300797816 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		B6D200B82B457E4A00797816 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D200AC2B4509A300797816 /* Dialog */,
+				B6D200B72B457E4100797816 /* Image */,
 				B6D200B12B45243300797816 /* ListItem */,
 				B6D200B62B4572FA00797816 /* Progress */,
 			);
@@ -230,6 +233,14 @@
 				B6D200B42B456D6300797816 /* CircularProgressView.swift */,
 			);
 			path = Progress;
+			sourceTree = "<group>";
+		};
+		B6D200B72B457E4100797816 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				B6D200B82B457E4A00797816 /* CachedAsyncImage.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +384,7 @@
 				B6D200B02B450D1600797816 /* AlertModifier.swift in Sources */,
 				B600618B2B41C9FC0099DA39 /* App.swift in Sources */,
 				B6D200B32B45244700797816 /* RepositoryListItem.swift in Sources */,
+				B6D200B92B457E4A00797816 /* CachedAsyncImage.swift in Sources */,
 				B6659D4C2B44570A002CBF38 /* GitHubRepoSearchScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

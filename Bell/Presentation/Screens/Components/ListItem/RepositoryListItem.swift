@@ -13,12 +13,24 @@ struct RepositoryListItem: View {
     let repository: GitHubRepoListResponse.Edge.Node
     var body: some View {
         HStack {
-            AsyncImage(url: repository.owner.avatarUrl) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
+            if let avatarUrl = repository.owner.avatarUrl {
+                CachedAsyncImage(url: avatarUrl) { phase in
+                    switch phase {
+                    case let .success(image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    case let .failure(error):
+                        let _ = logger.error("\(error.localizedDescription)")
+                        Color.gray
+                    case .empty:
+                        ProgressView()
+                    @unknown default:
+                        fatalError("AsyncImagePhase @unknown default")
+                    }
+                }
+                .frame(width: 50, height: 50)
             }
-            .frame(width: 50, height: 50)
             VStack {
                 Text(repository.nameWithOwner)
                     .bold()
