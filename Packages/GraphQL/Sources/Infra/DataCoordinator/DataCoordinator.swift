@@ -19,6 +19,7 @@ final class DataCoordinator {
         let authPayloads = ["Authorization": "Bearer " + Env.gitHubAccessToken]
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = authPayloads
+        configuration.timeoutIntervalForRequest = 30
         let client = URLSessionClient(sessionConfiguration: configuration, callbackQueue: nil)
         let provider = NetworkInterceptorProvider(store: store, client: client)
         let url = URL(string: "https://api.github.com/graphql")!
