@@ -9,7 +9,10 @@ import GraphQL_Dependency
 import GraphQL_Infra
 import GraphQL_Interface
 import GraphQL_Usecase
+import OSLog
 import UIKit
+
+let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "Logger")
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
