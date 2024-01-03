@@ -23,9 +23,13 @@ struct SearchContentView: View {
             } else if self.isSearching || self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
                 List {
                     Section("Recommended for You") {
-                        self.suggestButton(text: "Swift")
-                        self.suggestButton(text: "SwiftUI")
-                        self.suggestButton(text: "GraphQL")
+                        ForEach(["iOS", "Swift", "SwiftUI", "GraphQL", "Clean Architecture"], id: \.self) { text in
+                            Button(text) {
+                                self.viewModel.searchBarTextDidChange(to: text)
+                                self.viewModel.onSubmitSearch()
+                            }
+                            .buttonStyle(DefaultButtonStyle())
+                        }
                     }
                     .headerProminence(.increased)
                 }
@@ -56,17 +60,6 @@ struct SearchContentView: View {
                     self.dismissSearch()
                 })
         )
-    }
-
-    private func suggestButton(text: String) -> some View {
-        Button {
-            self.viewModel.searchBarTextDidChange(to: text)
-            self.viewModel.onSubmitSearch()
-        } label: {
-            Text(text)
-                .foregroundColor(.accentColor)
-                .background(Color(UIColor.systemBackground))
-        }
     }
 }
 
