@@ -5,7 +5,6 @@
 //  Created by Yuki Okudera on 2024/01/03.
 //
 
-import GraphQL_Domain
 import SwiftUI
 
 struct SearchContentView: View {
@@ -32,8 +31,11 @@ struct SearchContentView: View {
                 Text("No repositories found.\nPlease try searching with another keyword.")
             } else {
                 List {
-                    ForEach(self.viewModel.data, id: \.self) {
-                        self.repositoryListItem(data: $0)
+                    ForEach(self.viewModel.data, id: \.self) { data in
+                        RepositoryListItem(repository: data)
+                            .onAppear {
+                                self.viewModel.onAppearItem(itemData: data)
+                            }
                     }
                 }
             }
@@ -59,28 +61,6 @@ struct SearchContentView: View {
             Text(text)
                 .foregroundColor(.accentColor)
                 .background(Color(UIColor.systemBackground))
-        }
-    }
-
-    private func repositoryListItem(data: GitHubRepoListResponse.Edge.Node) -> some View {
-        HStack {
-            AsyncImage(url: data.owner.avatarUrl) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(width: 50, height: 50)
-            VStack {
-                Text(data.nameWithOwner)
-                    .bold()
-                    .foregroundStyle(.primary)
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-
-                Text(data.description ?? "-")
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2, reservesSpace: true)
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
-            }
         }
     }
 }
