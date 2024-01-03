@@ -43,7 +43,7 @@ final class DataCoordinator {
         return Future() { promise in
             self.apolloClient.fetch(query: query) { result in
                 switch result {
-                case .success(let gqlResult):
+                case let .success(gqlResult):
                     if let data = gqlResult.data {
                         promise(.success(data))
                     } else if let errors = gqlResult.errors {
@@ -53,7 +53,7 @@ final class DataCoordinator {
                         // unknown error
                         promise(.failure(.unknownError))
                     }
-                case .failure(let err):
+                case let .failure(err):
                     // Network or response format errors
                     promise(.failure(.networkError(error: err)))
                 }
