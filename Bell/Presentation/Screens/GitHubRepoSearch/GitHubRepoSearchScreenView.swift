@@ -25,6 +25,10 @@ struct GitHubRepoSearchScreenView: View {
                     self.viewModel.onSubmitSearch()
                 }
                 .navigationTitle(self.viewModel.navigationTitle)
+                .dialog(Binding(
+                    get: { self.viewModel.dialog },
+                    set: { dialog in self.viewModel.dialogDidChange(to: dialog) }
+                ))
         }
     }
 }
