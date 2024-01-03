@@ -159,6 +159,7 @@
 		B60061C22B41DAC00099DA39 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B6D200AB2B45099D00797816 /* Components */,
 				B60061922B41C9FD0099DA39 /* Preview Content */,
 				B60061C32B4245600099DA39 /* Screens */,
 			);
@@ -168,7 +169,6 @@
 		B60061C32B4245600099DA39 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				B6D200AB2B45099D00797816 /* Components */,
 				B6659D4A2B4456FC002CBF38 /* GitHubRepoSearch */,
 			);
 			path = Screens;
