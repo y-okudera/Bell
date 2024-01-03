@@ -66,7 +66,7 @@ struct AlertModifier: ViewModifier {
 extension AlertModifier {
     var alertViewData: Dialog.AlertViewData? {
         switch dialog {
-        case .alert(viewData: let viewData):
+        case let .alert(viewData: viewData):
             return viewData
         case .confirm:
             return nil
@@ -79,7 +79,7 @@ extension AlertModifier {
         switch dialog {
         case .alert:
             return nil
-        case .confirm(viewData: let viewData):
+        case let .confirm(viewData: viewData):
             return viewData
         case .none:
             return nil

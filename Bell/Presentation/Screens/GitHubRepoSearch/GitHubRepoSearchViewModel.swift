@@ -45,7 +45,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
                     logger.trace(".finished")
                     self.didSearchText = self.searchText
                     self.dismissSearch = true
-                case .failure(let error):
+                case let .failure(error):
                     self.handleSearchError(error)
                 }
             } receiveValue: { value in
@@ -68,7 +68,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
                 case .finished:
                     logger.trace(".finished")
                     break
-                case .failure(let error):
+                case let .failure(error):
                     self.handleSearchError(error)
                 }
             } receiveValue: { value in
@@ -89,7 +89,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
 
     private func handleSearchError(_ error: GraphQLError) {
         switch error {
-        case .gqlError(errors: let errors):
+        case let .gqlError(errors: errors):
             logger.error("\(errors)")
             self.dialog = .alert(viewData: .init(
                 title: "Failed to Search Repository",
@@ -97,7 +97,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
                 buttonText: "Close",
                 handler: nil
             ))
-        case .networkError(error: let error):
+        case let .networkError(error: error):
             logger.error("\(error)")
             self.dialog = .confirm(viewData: .init(
                 title: "Failed to Search Repository",
