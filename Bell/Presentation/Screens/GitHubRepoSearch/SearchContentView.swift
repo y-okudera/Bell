@@ -18,7 +18,9 @@ struct SearchContentView: View {
 
     var body: some View {
         VStack {
-            if self.isSearching || self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
+            if self.viewModel.isInitialLoading {
+                CircularProgressView()
+            } else if self.isSearching || self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
                 List {
                     Section("Recommended for You") {
                         self.suggestButton(text: "Swift")
@@ -36,6 +38,9 @@ struct SearchContentView: View {
                             .onAppear {
                                 self.viewModel.onAppearItem(itemData: data)
                             }
+                    }
+                    if self.viewModel.isAdditionalLoading {
+                        CircularProgressView(id: "loading_\(UUID().uuidString)")
                     }
                 }
             }

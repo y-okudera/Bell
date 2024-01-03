@@ -21,6 +21,7 @@
 		B6D200AE2B4509C300797816 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200AD2B4509C300797816 /* Dialog.swift */; };
 		B6D200B02B450D1600797816 /* AlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200AF2B450D1600797816 /* AlertModifier.swift */; };
 		B6D200B32B45244700797816 /* RepositoryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B22B45244700797816 /* RepositoryListItem.swift */; };
+		B6D200B52B456D6300797816 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B42B456D6300797816 /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		B6D200AD2B4509C300797816 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		B6D200AF2B450D1600797816 /* AlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModifier.swift; sourceTree = "<group>"; };
 		B6D200B22B45244700797816 /* RepositoryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListItem.swift; sourceTree = "<group>"; };
+		B6D200B42B456D6300797816 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			children = (
 				B6D200AC2B4509A300797816 /* Dialog */,
 				B6D200B12B45243300797816 /* ListItem */,
+				B6D200B62B4572FA00797816 /* Progress */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -219,6 +222,14 @@
 				B6D200B22B45244700797816 /* RepositoryListItem.swift */,
 			);
 			path = ListItem;
+			sourceTree = "<group>";
+		};
+		B6D200B62B4572FA00797816 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				B6D200B42B456D6300797816 /* CircularProgressView.swift */,
+			);
+			path = Progress;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +367,7 @@
 			files = (
 				B6659D502B448361002CBF38 /* SearchContentView.swift in Sources */,
 				B680EEB62B43B210005017F1 /* AppDelegate.swift in Sources */,
+				B6D200B52B456D6300797816 /* CircularProgressView.swift in Sources */,
 				B6659D4E2B4459E3002CBF38 /* GitHubRepoSearchViewModel.swift in Sources */,
 				B6D200AE2B4509C300797816 /* Dialog.swift in Sources */,
 				B6D200B02B450D1600797816 /* AlertModifier.swift in Sources */,

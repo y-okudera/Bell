@@ -17,6 +17,8 @@ final class GitHubRepoSearchViewModel: ObservableObject {
 
     @Published private(set) var searchText: String = ""
     @Published private(set) var didSearchText: String = ""
+    @Published private(set) var isInitialLoading: Bool = false
+    @Published private(set) var isAdditionalLoading: Bool = false
     @Published private(set) var dismissSearch: Bool = false
     @Published private(set) var data: [GitHubRepoListResponse.Edge.Node] = []
     @Published private(set) var pageInfo: PageInfo?
@@ -36,10 +38,14 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     }
 
     func onSubmitSearch() {
-        dismissSearch = false
+        self.isInitialLoading = true
+        self.dismissSearch = false
         let input = GitHubRepoFilterInput(after: nil, first: 10, query: self.searchText)
         self.gitHubRepoController.listGitHubRepo(input: input)
             .sink { completion in
+                defer {
+                    self.isInitialLoading = false
+                }
                 switch completion {
                 case .finished:
                     logger.trace(".finished")
@@ -61,13 +67,19 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     }
 
     func performAdditionalRequest() {
+        if self.isAdditionalLoading {
+            return
+        }
+        self.isAdditionalLoading = true
         let input = GitHubRepoFilterInput(after: self.pageInfo?.endCursor, first: 20, query: self.didSearchText)
         self.gitHubRepoController.listGitHubRepo(input: input)
             .sink { completion in
+                defer {
+                    self.isAdditionalLoading = false
+                }
                 switch completion {
                 case .finished:
                     logger.trace(".finished")
-                    break
                 case let .failure(error):
                     self.handleSearchError(error)
                 }
