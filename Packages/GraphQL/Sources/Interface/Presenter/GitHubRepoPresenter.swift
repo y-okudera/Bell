@@ -44,6 +44,8 @@ extension GitHubRepoListResponse.Edge {
 extension GitHubRepoListResponse.Edge.Node {
     init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node?) {
         self = .init(
+            id: data?.asRepository?.id ?? "",
+            url: URL(string: data?.asRepository?.url ?? ""),
             description: data?.asRepository?.description,
             homepageUrl: URL(string: data?.asRepository?.homepageUrl ?? ""),
             nameWithOwner: data?.asRepository?.nameWithOwner ?? "",
