@@ -26,7 +26,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     @Published private(set) var dialog: Dialog?
 
     var navigationTitle: String {
-        self.didSearchText.isEmpty ? "Repositories" : "\(self.didSearchText) \(String.localizedStringWithFormat("%d", self.repositoryCount))件"
+        self.didSearchText.isEmpty ? "Repositories" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
     }
 
     func searchBarTextDidChange(to text: String) {

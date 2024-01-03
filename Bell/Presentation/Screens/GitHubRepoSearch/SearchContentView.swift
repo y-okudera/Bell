@@ -17,7 +17,7 @@ struct SearchContentView: View {
     }
 
     var body: some View {
-        VStack {
+        Group {
             if self.viewModel.isInitialLoading {
                 CircularProgressView()
             } else if self.isSearching || self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
