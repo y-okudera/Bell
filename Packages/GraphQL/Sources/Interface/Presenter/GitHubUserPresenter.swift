@@ -22,7 +22,7 @@ extension GitHubUserConnection {
         self.init(
             edges: (data.search.edges ?? []).compactMap { $0 }.map { .init($0) },
             pageInfo: .init(data.search.pageInfo),
-            totalCount: data.search.repositoryCount
+            totalCount: data.search.userCount
         )
     }
 }

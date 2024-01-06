@@ -49,5 +49,6 @@ query Search(
       startCursor
     }
     repositoryCount
+    userCount
   }
 }
