@@ -10,5 +10,5 @@ import GraphQL
 import GraphQL_Domain
 
 public protocol GitHubRepoPresenter {
-    func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoListResponse
+    func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoConnection
 }

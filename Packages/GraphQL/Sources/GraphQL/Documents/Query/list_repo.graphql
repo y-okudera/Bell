@@ -9,8 +9,6 @@ query ListRepo(
     query: $query
     type: REPOSITORY
   ) {
-    codeCount
-    discussionCount
     edges {
       cursor
       node {
@@ -21,18 +19,21 @@ query ListRepo(
           homepageUrl
           nameWithOwner
           owner {
+            id
             avatarUrl
+            login
+            resourcePath
+            url
           }
-          stargazers {
-            totalCount
-          }
+          stargazerCount
           primaryLanguage {
+            id
             name
+            color
           }
         }
       }
     }
-    issueCount
     pageInfo {
       endCursor
       hasNextPage
@@ -40,7 +41,5 @@ query ListRepo(
       startCursor
     }
     repositoryCount
-    userCount
-    wikiCount
   }
 }

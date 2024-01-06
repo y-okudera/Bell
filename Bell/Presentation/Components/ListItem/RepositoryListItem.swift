@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RepositoryListItem: View {
     @Environment(\.openURL) var openURL
-    let repository: GitHubRepoListResponse.Edge.Node
+    let repository: GitHubRepo
     var body: some View {
         Button(action: {
             if let url = self.repository.url {
@@ -56,15 +56,25 @@ struct RepositoryListItem: View {
 }
 
 #Preview {
-    let repository = GitHubRepoListResponse.Edge.Node(
+    let repository = GitHubRepo(
         id: "MDEwOlJlcG9zaXRvcnk0NDgzODk0OQ==",
         url: URL(string: "https://github.com/apple/swift"),
         description: "The Swift Programming Language",
         homepageUrl: URL(string: "https://swift.org"),
         nameWithOwner: "apple/swift",
-        owner: .init(avatarUrl: .init(string: "https://avatars.githubusercontent.com/u/10639145?v=4")),
-        stargazers: .init(totalCount: 64875),
-        primaryLanguage: .init(name: "C++")
+        owner: .init(
+            id: "",
+            avatarUrl: .init(string: "https://avatars.githubusercontent.com/u/10639145?v=4"),
+            login: "",
+            resourcePath: nil,
+            url: nil
+        ),
+        stargazerCount: 64875,
+        primaryLanguage: .init(
+            id: "",
+            name: "C++",
+            color: nil
+        )
     )
     return RepositoryListItem(repository: repository)
 }
