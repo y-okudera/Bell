@@ -11,5 +11,5 @@ import GraphQL
 import GraphQL_Domain
 
 public protocol GitHubRepoRepository {
-    func listGitHubRepo(input: GitHubRepoFilterInput) -> Future<GitHub.ListRepoQuery.Data, GraphQL_Domain.GraphQLError>
+    func listGitHubRepo(input: GitHubSearchFilterInput) -> Future<GitHub.SearchQuery.Data, GraphQL_Domain.GraphQLError>
 }

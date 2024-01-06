@@ -36,5 +36,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         DependencyContainer.shared.register(key: InjectionKey.gitHubRepoController.capitalized) {
             GitHubRepoControllerImpl()
         }
+        DependencyContainer.shared.register(key: InjectionKey.gitHubUserRepository.capitalized) {
+            GitHubUserRepository()
+        }
+        DependencyContainer.shared.register(key: InjectionKey.gitHubUserPresenter.capitalized) {
+            GitHubUserPresenter()
+        }
+        DependencyContainer.shared.register(key: InjectionKey.gitHubUserService.capitalized) {
+            GitHubUserServiceImpl()
+        }
+        DependencyContainer.shared.register(key: InjectionKey.gitHubUserController.capitalized) {
+            GitHubUserControllerImpl()
+        }
     }
 }

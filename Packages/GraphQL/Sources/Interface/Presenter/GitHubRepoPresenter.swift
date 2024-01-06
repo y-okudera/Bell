@@ -12,13 +12,13 @@ import GraphQL_Usecase
 
 public struct GitHubRepoPresenter: GraphQL_Usecase.GitHubRepoPresenter {
     public init() {}
-    public func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoConnection {
+    public func responseList(data: GitHub.SearchQuery.Data) -> GitHubRepoConnection {
         .init(data)
     }
 }
 
 extension GitHubRepoConnection {
-    convenience init(_ data: GitHub.ListRepoQuery.Data) {
+    convenience init(_ data: GitHub.SearchQuery.Data) {
         self.init(
             edges: (data.search.edges ?? []).compactMap { $0 }.map { .init($0) },
             pageInfo: .init(data.search.pageInfo),
@@ -28,7 +28,7 @@ extension GitHubRepoConnection {
 }
 
 extension Edge<GitHubRepo> {
-    convenience init(_ data: GitHub.ListRepoQuery.Data.Search.Edge) {
+    convenience init(_ data: GitHub.SearchQuery.Data.Search.Edge) {
         self.init(
             cursor: data.cursor,
             node: .init(data.node)
@@ -37,7 +37,7 @@ extension Edge<GitHubRepo> {
 }
 
 extension GitHubRepo {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node?) {
+    init(_ data: GitHub.SearchQuery.Data.Search.Edge.Node?) {
         self.init(
             id: data?.asRepository?.id ?? "",
             url: URL(string: data?.asRepository?.url ?? ""),
@@ -51,8 +51,8 @@ extension GitHubRepo {
     }
 }
 
-extension Owner {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.Owner?) {
+extension GitHubUser {
+    init(_ data: GitHub.SearchQuery.Data.Search.Edge.Node.AsRepository.Owner?) {
         self.init(
             id: data?.id ?? "",
             avatarUrl: URL(string: data?.avatarUrl ?? ""),
@@ -64,7 +64,7 @@ extension Owner {
 }
 
 extension PrimaryLanguage {
-    init?(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.PrimaryLanguage?) {
+    init?(_ data: GitHub.SearchQuery.Data.Search.Edge.Node.AsRepository.PrimaryLanguage?) {
         guard let primaryLanguage = data else {
             return nil
         }
@@ -77,7 +77,7 @@ extension PrimaryLanguage {
 }
 
 extension PageInfo {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.PageInfo?) {
+    init(_ data: GitHub.SearchQuery.Data.Search.PageInfo?) {
         self = .init(
             endCursor: data?.endCursor,
             hasNextPage: data?.hasNextPage ?? false,
