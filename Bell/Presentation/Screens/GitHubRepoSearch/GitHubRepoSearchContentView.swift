@@ -1,5 +1,5 @@
 //
-//  SearchContentView.swift
+//  GitHubRepoSearchContentView.swift
 //  Bell
 //
 //  Created by Yuki Okudera on 2024/01/03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchContentView: View {
+struct GitHubRepoSearchContentView: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.dismissSearch) private var dismissSearch
     @ObservedObject private var viewModel: GitHubRepoSearchViewModel
@@ -65,5 +65,5 @@ struct SearchContentView: View {
 }
 
 #Preview {
-    SearchContentView(viewModel: .init())
+    GitHubRepoSearchContentView(viewModel: .init())
 }

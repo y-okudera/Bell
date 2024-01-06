@@ -1,5 +1,5 @@
 //
-//  GitHubRepoSearchViewModel.swift
+//  GitHubUserSearchViewModel.swift
 //  Bell
 //
 //  Created by Yuki Okudera on 2024/01/02.
@@ -11,22 +11,22 @@ import GraphQL_Dependency
 import GraphQL_Domain
 import GraphQL_Interface
 
-final class GitHubRepoSearchViewModel: ObservableObject {
+final class GitHubUserSearchViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
-    private lazy var gitHubRepoController: GitHubRepoController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubRepoController.capitalized)
+    private lazy var gitHubUserController: GitHubUserController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubUserController.capitalized)
 
     @Published private(set) var searchText: String = ""
     @Published private(set) var didSearchText: String = ""
     @Published private(set) var isInitialLoading: Bool = false
     @Published private(set) var isAdditionalLoading: Bool = false
     @Published private(set) var dismissSearch: Bool = false
-    @Published private(set) var data: [GitHubRepo] = []
+    @Published private(set) var data: [GitHubUser] = []
     @Published private(set) var pageInfo: PageInfo?
-    @Published private(set) var repositoryCount: Int = 0
+    @Published private(set) var userCount: Int = 0
     @Published private(set) var dialog: Dialog?
 
     var navigationTitle: String {
-        self.didSearchText.isEmpty ? "Repositories" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
+        self.didSearchText.isEmpty ? "Users" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.userCount))"
     }
 
     func searchBarTextDidChange(to text: String) {
@@ -41,7 +41,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         self.isInitialLoading = true
         self.dismissSearch = false
         let input = GitHubSearchFilterInput(after: nil, first: 10, query: self.searchText)
-        self.gitHubRepoController.listGitHubRepo(input: input)
+        self.gitHubUserController.listGitHubUser(input: input)
             .sink { completion in
                 defer {
                     self.isInitialLoading = false
@@ -60,7 +60,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
 
-    func onAppearItem(itemData: GitHubRepo) {
+    func onAppearItem(itemData: GitHubUser) {
         if self.data.last == itemData && self.pageInfo?.hasNextPage == true {
             self.performAdditionalRequest()
         }
@@ -72,7 +72,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         }
         self.isAdditionalLoading = true
         let input = GitHubSearchFilterInput(after: self.pageInfo?.endCursor, first: 20, query: self.didSearchText)
-        self.gitHubRepoController.listGitHubRepo(input: input)
+        self.gitHubUserController.listGitHubUser(input: input)
             .sink { completion in
                 defer {
                     self.isAdditionalLoading = false
@@ -89,9 +89,9 @@ final class GitHubRepoSearchViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
 
-    private func handleSearchResults(_ response: GitHubRepoConnection, isAdditionalRequest: Bool) {
+    private func handleSearchResults(_ response: GitHubUserConnection, isAdditionalRequest: Bool) {
         self.pageInfo = response.pageInfo
-        self.repositoryCount = response.totalCount
+        self.userCount = response.totalCount
         if isAdditionalRequest {
             self.data.append(contentsOf: response.edges.compactMap { $0 }.map { $0.node })
         } else {
@@ -104,7 +104,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         case let .gqlError(errors: errors):
             logger.error("\(errors)")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search Repository",
+                title: "Failed to Search User",
                 message: "A GraphQL error has occurred.\n\n" + errors.map { $0.localizedDescription }.joined(separator: "\n\n"),
                 buttonText: "Close",
                 handler: nil
@@ -112,7 +112,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         case let .networkError(error: error):
             logger.error("\(error)")
             self.dialog = .confirm(viewData: .init(
-                title: "Failed to Search Repository",
+                title: "Failed to Search User",
                 message: "Please check your network connection and try again.",
                 primaryButtonText: "Retry",
                 secondaryButtonText: "Cancel",
@@ -124,7 +124,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         case .unknownError:
             logger.error("GraphQLError.unknownError:")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search Repository",
+                title: "Failed to Search User",
                 message: "An unknown error has occurred.",
                 buttonText: "Close",
                 handler: nil
