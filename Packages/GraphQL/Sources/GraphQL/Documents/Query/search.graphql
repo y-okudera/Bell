@@ -1,13 +1,14 @@
-query ListRepo(
+query Search(
   $after: String
   $first: Int
   $query: String!
+  $searchType: SearchType!
 ) {
   search(
     after: $after
     first: $first
     query: $query
-    type: REPOSITORY
+    type: $searchType
   ) {
     edges {
       cursor
@@ -31,6 +32,13 @@ query ListRepo(
             name
             color
           }
+        }
+        ... on User {
+          id
+          avatarUrl
+          login
+          resourcePath
+          url
         }
       }
     }

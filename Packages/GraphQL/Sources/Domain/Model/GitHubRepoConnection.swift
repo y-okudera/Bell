@@ -21,7 +21,7 @@ public struct GitHubRepo: Node {
     /// The repository's name with owner.
     public let nameWithOwner: String
     /// The User owner of the repository.
-    public let owner: Owner
+    public let owner: GitHubUser
     /// Returns a count of how many stargazers there are on this object
     public let stargazerCount: Int
     /// The primary language of the repository's code.
@@ -33,7 +33,7 @@ public struct GitHubRepo: Node {
         description: String?,
         homepageUrl: URL?,
         nameWithOwner: String,
-        owner: Owner,
+        owner: GitHubUser,
         stargazerCount: Int,
         primaryLanguage: PrimaryLanguage?
     ) {
@@ -51,7 +51,7 @@ public struct GitHubRepo: Node {
 /// Search.Edge.Node.AsRepository.Owner
 ///
 /// Parent Type: `RepositoryOwner`
-public struct Owner: Node {
+public struct GitHubUser: Node {
     /// The Node ID of the RepositoryOwner object
     public let id: String
     /// A URL pointing to the owner's public avatar.

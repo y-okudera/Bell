@@ -12,6 +12,10 @@ public enum InjectionKey: String {
     case gitHubRepoPresenter
     case gitHubRepoService
     case gitHubRepoController
+    case gitHubUserRepository
+    case gitHubUserPresenter
+    case gitHubUserService
+    case gitHubUserController
 
     public var capitalized: String {
         self.rawValue.prefix(1).uppercased() + self.rawValue.dropFirst()
