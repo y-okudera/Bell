@@ -11,7 +11,7 @@ import GraphQL_Domain
 import Foundation
 
 public protocol GitHubRepoService {
-    func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError>
+    func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoConnection, GraphQLError>
 }
 
 public struct GitHubRepoServiceImpl: GitHubRepoService {
@@ -24,7 +24,7 @@ public struct GitHubRepoServiceImpl: GitHubRepoService {
     
     public init() {}
     
-    public func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError> {
+    public func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoConnection, GraphQLError> {
         self.gitHubRepoRepository.listGitHubRepo(input: input)
             .map { gitHubRepoPresenter.responseList(data: $0) }
             .eraseToAnyPublisher()

@@ -20,7 +20,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     @Published private(set) var isInitialLoading: Bool = false
     @Published private(set) var isAdditionalLoading: Bool = false
     @Published private(set) var dismissSearch: Bool = false
-    @Published private(set) var data: [GitHubRepoListResponse.Edge.Node] = []
+    @Published private(set) var data: [GitHubRepo] = []
     @Published private(set) var pageInfo: PageInfo?
     @Published private(set) var repositoryCount: Int = 0
     @Published private(set) var dialog: Dialog?
@@ -60,7 +60,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
 
-    func onAppearItem(itemData: GitHubRepoListResponse.Edge.Node) {
+    func onAppearItem(itemData: GitHubRepo) {
         if self.data.last == itemData && self.pageInfo?.hasNextPage == true {
             self.performAdditionalRequest()
         }
@@ -89,13 +89,13 @@ final class GitHubRepoSearchViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
 
-    private func handleSearchResults(_ response: GitHubRepoListResponse, isAdditionalRequest: Bool) {
+    private func handleSearchResults(_ response: GitHubRepoConnection, isAdditionalRequest: Bool) {
         self.pageInfo = response.pageInfo
-        self.repositoryCount = response.repositoryCount
+        self.repositoryCount = response.totalCount
         if isAdditionalRequest {
-            self.data.append(contentsOf: response.edges.compactMap { $0?.node })
+            self.data.append(contentsOf: response.edges.compactMap { $0 }.map { $0.node })
         } else {
-            self.data = response.edges.compactMap { $0?.node }
+            self.data = response.edges.compactMap { $0 }.map { $0.node }
         }
     }
 

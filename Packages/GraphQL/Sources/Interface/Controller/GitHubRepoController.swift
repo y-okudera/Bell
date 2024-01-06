@@ -12,7 +12,7 @@ import GraphQL_Domain
 import GraphQL_Usecase
 
 public protocol GitHubRepoController {
-    func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError>
+    func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoConnection, GraphQLError>
 }
 
 public struct GitHubRepoControllerImpl: GitHubRepoController {
@@ -22,7 +22,7 @@ public struct GitHubRepoControllerImpl: GitHubRepoController {
 
     public init() {}
 
-    public func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoListResponse, GraphQLError> {
+    public func listGitHubRepo(input: GitHubRepoFilterInput) -> AnyPublisher<GitHubRepoConnection, GraphQLError> {
         self.gitHubRepoService.listGitHubRepo(input: input)
     }
 }

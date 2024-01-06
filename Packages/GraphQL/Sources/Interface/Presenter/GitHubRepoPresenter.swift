@@ -12,65 +12,67 @@ import GraphQL_Usecase
 
 public struct GitHubRepoPresenter: GraphQL_Usecase.GitHubRepoPresenter {
     public init() {}
-    public func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoListResponse {
+    public func responseList(data: GitHub.ListRepoQuery.Data) -> GitHubRepoConnection {
         .init(data)
     }
 }
 
-extension GitHubRepoListResponse {
-    init(_ data: GitHub.ListRepoQuery.Data) {
-        self = .init(
-            codeCount: data.search.codeCount,
-            discussionCount: data.search.discussionCount,
-            edges: (data.search.edges ?? []).compactMap { .init($0) },
-            issueCount: data.search.issueCount,
+extension GitHubRepoConnection {
+    convenience init(_ data: GitHub.ListRepoQuery.Data) {
+        self.init(
+            edges: (data.search.edges ?? []).compactMap { $0 }.map { .init($0) },
             pageInfo: .init(data.search.pageInfo),
-            repositoryCount: data.search.repositoryCount,
-            userCount: data.search.userCount,
-            wikiCount: data.search.wikiCount
+            totalCount: data.search.repositoryCount
         )
     }
 }
 
-extension GitHubRepoListResponse.Edge {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.Edge?) {
-        self = .init(
-            cursor: data?.cursor ?? "",
-            node: .init(data?.node)
+extension Edge<GitHubRepo> {
+    convenience init(_ data: GitHub.ListRepoQuery.Data.Search.Edge) {
+        self.init(
+            cursor: data.cursor,
+            node: .init(data.node)
         )
     }
 }
 
-extension GitHubRepoListResponse.Edge.Node {
+extension GitHubRepo {
     init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node?) {
-        self = .init(
+        self.init(
             id: data?.asRepository?.id ?? "",
             url: URL(string: data?.asRepository?.url ?? ""),
             description: data?.asRepository?.description,
             homepageUrl: URL(string: data?.asRepository?.homepageUrl ?? ""),
             nameWithOwner: data?.asRepository?.nameWithOwner ?? "",
             owner: .init(data?.asRepository?.owner),
-            stargazers: .init(data?.asRepository?.stargazers),
+            stargazerCount: data?.asRepository?.stargazerCount ?? 0,
             primaryLanguage: .init(data?.asRepository?.primaryLanguage)
         )
     }
 }
 
-extension GitHubRepoListResponse.Edge.Node.Owner {
+extension Owner {
     init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.Owner?) {
-        self = .init(avatarUrl: .init(string: data?.avatarUrl ?? ""))
+        self.init(
+            id: data?.id ?? "",
+            avatarUrl: URL(string: data?.avatarUrl ?? ""),
+            login: data?.login ?? "",
+            resourcePath: URL(string: data?.resourcePath ?? ""),
+            url: URL(string: data?.url ?? "")
+        )
     }
 }
 
-extension GitHubRepoListResponse.Edge.Node.Stargazers {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.Stargazers?) {
-        self = .init(totalCount: data?.totalCount ?? 0)
-    }
-}
-
-extension GitHubRepoListResponse.Edge.Node.PrimaryLanguage {
-    init(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.PrimaryLanguage?) {
-        self = .init(name: data?.name ?? "")
+extension PrimaryLanguage {
+    init?(_ data: GitHub.ListRepoQuery.Data.Search.Edge.Node.AsRepository.PrimaryLanguage?) {
+        guard let primaryLanguage = data else {
+            return nil
+        }
+        self.init(
+            id: primaryLanguage.id,
+            name: primaryLanguage.name,
+            color: primaryLanguage.color
+        )
     }
 }
 
