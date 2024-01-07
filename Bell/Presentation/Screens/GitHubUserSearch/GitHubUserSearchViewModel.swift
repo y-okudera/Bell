@@ -15,7 +15,8 @@ final class GitHubUserSearchViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     private lazy var gitHubUserController: GitHubUserController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubUserController.capitalized)
 
-    @Published private(set) var searchText: String = ""
+    @Published var searchText: String = ""
+    @Published var dialog: Dialog?
     @Published private(set) var didSearchText: String = ""
     @Published private(set) var isInitialLoading: Bool = false
     @Published private(set) var isAdditionalLoading: Bool = false
@@ -23,18 +24,14 @@ final class GitHubUserSearchViewModel: ObservableObject {
     @Published private(set) var data: [GitHubUser] = []
     @Published private(set) var pageInfo: PageInfo?
     @Published private(set) var userCount: Int = 0
-    @Published private(set) var dialog: Dialog?
 
     var navigationTitle: String {
         self.didSearchText.isEmpty ? "Users" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.userCount))"
     }
 
-    func searchBarTextDidChange(to text: String) {
-        self.searchText = text
-    }
-
-    func dialogDidChange(to dialog: Dialog?) {
-        self.dialog = dialog
+    func onChooseRecommendedKeyword(_ keyword: String) {
+        self.searchText = keyword
+        self.onSubmitSearch()
     }
 
     func onSubmitSearch() {
