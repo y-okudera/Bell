@@ -15,7 +15,8 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     private lazy var gitHubRepoController: GitHubRepoController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubRepoController.capitalized)
 
-    @Published private(set) var searchText: String = ""
+    @Published var searchText: String = ""
+    @Published var dialog: Dialog?
     @Published private(set) var didSearchText: String = ""
     @Published private(set) var isInitialLoading: Bool = false
     @Published private(set) var isAdditionalLoading: Bool = false
@@ -23,18 +24,14 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     @Published private(set) var data: [GitHubRepo] = []
     @Published private(set) var pageInfo: PageInfo?
     @Published private(set) var repositoryCount: Int = 0
-    @Published private(set) var dialog: Dialog?
 
     var navigationTitle: String {
         self.didSearchText.isEmpty ? "Repositories" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
     }
 
-    func searchBarTextDidChange(to text: String) {
-        self.searchText = text
-    }
-
-    func dialogDidChange(to dialog: Dialog?) {
-        self.dialog = dialog
+    func onChooseRecommendedKeyword(_ keyword: String) {
+        self.searchText = keyword
+        self.onSubmitSearch()
     }
 
     func onSubmitSearch() {

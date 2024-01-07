@@ -10,10 +10,16 @@ import SwiftUI
 struct GitHubRepoSearchContentView: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.dismissSearch) private var dismissSearch
+    @EnvironmentObject private var tabViewModel: TabViewModel
     @ObservedObject private var viewModel: GitHubRepoSearchViewModel
+    @Binding private var dismissSearchTrigger: Bool
 
-    init(viewModel: GitHubRepoSearchViewModel) {
-        self.viewModel = viewModel
+    init(
+        viewModel: GitHubRepoSearchViewModel,
+        dismissSearchTrigger: Binding<Bool>
+    ) {
+        self._viewModel = .init(wrappedValue: viewModel)
+        self._dismissSearchTrigger = dismissSearchTrigger
     }
 
     var body: some View {
@@ -25,45 +31,65 @@ struct GitHubRepoSearchContentView: View {
                     Section("Recommended for You") {
                         ForEach(["iOS", "Swift", "SwiftUI", "GraphQL", "Clean Architecture"], id: \.self) { text in
                             Button(text) {
-                                self.viewModel.searchBarTextDidChange(to: text)
-                                self.viewModel.onSubmitSearch()
+                                self.viewModel.onChooseRecommendedKeyword(text)
                             }
                             .buttonStyle(DefaultButtonStyle())
                         }
                     }
                     .headerProminence(.increased)
                 }
+                .simultaneousGesture(
+                    DragGesture()
+                        .onChanged { _ in
+                            self.dismissSearch()
+                            self.dismissSearchTrigger = false
+                        }
+                )
             } else if !self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
                 Text("No repositories found.\nPlease try searching with another keyword.")
             } else {
-                List {
-                    ForEach(self.viewModel.data, id: \.id) { data in
-                        RepositoryListItem(repository: data)
-                            .listRowInsets(EdgeInsets())
-                            .onAppear {
-                                self.viewModel.onAppearItem(itemData: data)
-                            }
+                ScrollViewReader(content: { proxy in
+                    List {
+                        ForEach(self.viewModel.data, id: \.id) { data in
+                            RepositoryListItem(repository: data)
+                                .id(self.viewModel.data.first?.id == data.id ? "top" : nil)
+                                .listRowInsets(EdgeInsets())
+                                .onAppear {
+                                    self.viewModel.onAppearItem(itemData: data)
+                                }
+                        }
+                        if self.viewModel.isAdditionalLoading {
+                            CircularProgressView(id: "loading_\(UUID().uuidString)")
+                        }
                     }
-                    if self.viewModel.isAdditionalLoading {
-                        CircularProgressView(id: "loading_\(UUID().uuidString)")
+                    .onChange(of: self.tabViewModel.activeTabTapped[.repoSearch]) {
+                        withAnimation {
+                            proxy.scrollTo("top", anchor: .top)
+                        }
                     }
-                }
+                })
             }
         }
-        .onChange(of: self.viewModel.dismissSearch) { _, newValue in
-            if newValue {
+        .onAppear {
+            defer {
+                self.dismissSearchTrigger = false
+            }
+            if dismissSearchTrigger {
                 self.dismissSearch()
             }
         }
-        .simultaneousGesture(
-            DragGesture()
-                .onChanged({ _ in
-                    self.dismissSearch()
-                })
-        )
+        .onChange(of: dismissSearchTrigger, { _, newValue in
+            defer {
+                self.dismissSearchTrigger = false
+            }
+            if newValue {
+                self.dismissSearch()
+            }
+        })
     }
 }
 
 #Preview {
-    GitHubRepoSearchContentView(viewModel: .init())
+    GitHubRepoSearchContentView(viewModel: .init(), dismissSearchTrigger: .constant(false))
+        .environmentObject(TabViewModel())
 }
