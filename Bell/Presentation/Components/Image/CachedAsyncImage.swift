@@ -68,7 +68,7 @@ private class ImageCache {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-        case let .failure(error):
+        case .failure:
             Color.gray
         case .empty:
             ProgressView()
