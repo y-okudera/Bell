@@ -6,27 +6,26 @@
 //
 
 import Combine
-import Foundation
 import GraphQL_Dependency
 import GraphQL_Domain
 import GraphQL_Interface
 
 final class GitHubRepoSearchViewModel: ObservableObject {
-    private var cancellables: Set<AnyCancellable> = []
-    private lazy var gitHubRepoController: GitHubRepoController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubRepoController.capitalized)
-
     @Published var searchText: String = ""
     @Published var dialog: Dialog?
-    @Published private(set) var didSearchText: String = ""
-    @Published private(set) var isInitialLoading: Bool = false
-    @Published private(set) var isAdditionalLoading: Bool = false
-    @Published private(set) var dismissSearch: Bool = false
-    @Published private(set) var data: [GitHubRepo] = []
-    @Published private(set) var pageInfo: PageInfo?
-    @Published private(set) var repositoryCount: Int = 0
+    @Published private(set) var loadingState: GitHubRepoLoadingState = .idle
+
+    private lazy var gitHubRepoController: GitHubRepoController = DependencyContainer.shared.resolve(key: InjectionKey.gitHubRepoController.capitalized)
+    private var cancellables: Set<AnyCancellable> = []
+    private var isInitialLoading: Bool = false
+    private var isAdditionalLoading: Bool = false
+    private var searchedText: String = ""
+    private var data: [GitHubRepo] = []
+    private var pageInfo: PageInfo?
+    private var repositoryCount: Int = 0
 
     var navigationTitle: String {
-        self.didSearchText.isEmpty ? "Repositories" : "\(self.didSearchText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
+        self.searchedText.isEmpty ? "Repositories" : "\(self.searchedText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
     }
 
     func onChooseRecommendedKeyword(_ keyword: String) {
@@ -36,20 +35,15 @@ final class GitHubRepoSearchViewModel: ObservableObject {
 
     func onSubmitSearch() {
         self.isInitialLoading = true
-        self.dismissSearch = false
-        let input = GitHubSearchFilterInput(after: nil, first: 10, query: self.searchText)
-        self.gitHubRepoController.listGitHubRepo(input: input)
+        self.updateState()
+
+        self.gitHubRepoController.listGitHubRepo(input: .init(after: nil, first: 10, query: self.searchText))
             .sink { completion in
-                defer {
-                    self.isInitialLoading = false
-                }
                 switch completion {
                 case .finished:
-                    logger.trace(".finished")
-                    self.didSearchText = self.searchText
-                    self.dismissSearch = true
+                    break
                 case let .failure(error):
-                    self.handleSearchError(error)
+                    self.handleSearchError(error, isAdditionalRequest: false)
                 }
             } receiveValue: { value in
                 self.handleSearchResults(value, isAdditionalRequest: false)
@@ -64,21 +58,18 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     }
 
     func performAdditionalRequest() {
-        if self.isAdditionalLoading {
+        if self.loadingState == .initialLoading || self.isAdditionalLoading {
             return
         }
         self.isAdditionalLoading = true
-        let input = GitHubSearchFilterInput(after: self.pageInfo?.endCursor, first: 20, query: self.didSearchText)
-        self.gitHubRepoController.listGitHubRepo(input: input)
+        self.updateState()
+        self.gitHubRepoController.listGitHubRepo(input: .init(after: self.pageInfo?.endCursor, first: 20, query: self.searchedText))
             .sink { completion in
-                defer {
-                    self.isAdditionalLoading = false
-                }
                 switch completion {
                 case .finished:
-                    logger.trace(".finished")
+                    break
                 case let .failure(error):
-                    self.handleSearchError(error)
+                    self.handleSearchError(error, isAdditionalRequest: true)
                 }
             } receiveValue: { value in
                 self.handleSearchResults(value, isAdditionalRequest: true)
@@ -86,17 +77,39 @@ final class GitHubRepoSearchViewModel: ObservableObject {
             .store(in: &self.cancellables)
     }
 
+    func updateState() {
+        if self.isInitialLoading {
+            self.loadingState = .initialLoading
+        } else if self.isAdditionalLoading {
+            self.loadingState = .loaded(data: self.data, isAdditionalLoading: self.isAdditionalLoading)
+        } else if self.data.isEmpty {
+            self.loadingState = self.searchedText.isEmpty ? .idle : .emptyState
+        } else {
+            self.loadingState = .loaded(data: self.data, isAdditionalLoading: self.isAdditionalLoading)
+        }
+    }
+
     private func handleSearchResults(_ response: GitHubRepoConnection, isAdditionalRequest: Bool) {
         self.pageInfo = response.pageInfo
         self.repositoryCount = response.totalCount
         if isAdditionalRequest {
+            self.isAdditionalLoading = false
             self.data.append(contentsOf: response.edges.compactMap { $0 }.map { $0.node })
         } else {
+            self.isInitialLoading = false
             self.data = response.edges.compactMap { $0 }.map { $0.node }
+            self.searchedText = self.searchText
         }
+        self.updateState()
     }
 
-    private func handleSearchError(_ error: GraphQLError) {
+    private func handleSearchError(_ error: GraphQLError, isAdditionalRequest: Bool) {
+        if isAdditionalRequest {
+            self.isAdditionalLoading = false
+        } else {
+            self.isInitialLoading = false
+        }
+        self.updateState()
         switch error {
         case let .gqlError(errors: errors):
             logger.error("\(errors)")
@@ -114,7 +127,11 @@ final class GitHubRepoSearchViewModel: ObservableObject {
                 primaryButtonText: "Retry",
                 secondaryButtonText: "Cancel",
                 primaryButtonHandler: { [weak self] in
-                    self?.onSubmitSearch()
+                    if isAdditionalRequest {
+                        self?.performAdditionalRequest()
+                    } else {
+                        self?.onSubmitSearch()
+                    }
                 },
                 secondaryButtonHandler: nil
             ))

@@ -22,7 +22,7 @@ struct GitHubUserSearchScreenView: View {
 
     var body: some View {
         GitHubUserSearchContentView(viewModel: self.viewModel, dismissSearchTrigger: self.$dismissSearchTrigger)
-            .environmentObject(tabViewModel)
+            .environmentObject(self.tabViewModel)
             .navigationTitle(self.viewModel.navigationTitle)
             .searchable(
                 text: self.$viewModel.searchText,
@@ -32,8 +32,13 @@ struct GitHubUserSearchScreenView: View {
             .onSubmit(of: .search) {
                 self.viewModel.onSubmitSearch()
             }
-            .onChange(of: self.viewModel.dismissSearch) { _, newValue in
-                self.dismissSearchTrigger = newValue
+            .onChange(of: self.viewModel.loadingState) { _, newValue in
+                switch newValue {
+                case .idle, .initialLoading:
+                    self.dismissSearchTrigger = false
+                case .emptyState, .loaded:
+                    self.dismissSearchTrigger = true
+                }
             }
             .dialog(self.$viewModel.dialog)
     }

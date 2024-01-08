@@ -69,7 +69,6 @@ private class ImageCache {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         case let .failure(error):
-            let _ = logger.error("\(error.localizedDescription)")
             Color.gray
         case .empty:
             ProgressView()
