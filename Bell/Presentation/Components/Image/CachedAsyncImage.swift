@@ -26,26 +26,26 @@ struct CachedAsyncImage<Content>: View where Content: View {
     }
 
     var body: some View{
-        if let cached = ImageCache[url] {
-            let _ = logger.trace("cached: \(url.absoluteString)")
-            content(.success(cached))
+        if let cached = ImageCache[self.url] {
+            let _ = logger.trace("cached: \(self.url.absoluteString)")
+            self.content(.success(cached))
         } else {
-            let _ = logger.trace("request: \(url.absoluteString)")
+            let _ = logger.trace("request: \(self.url.absoluteString)")
             AsyncImage(
-                url: url,
-                scale: scale,
-                transaction: transaction
+                url: self.url,
+                scale: self.scale,
+                transaction: self.transaction
             ) { phase in
-                cacheAndRender(phase: phase)
+                self.cacheAndRender(phase: phase)
             }
         }
     }
 
     private func cacheAndRender(phase: AsyncImagePhase) -> some View {
         if case .success (let image) = phase {
-            ImageCache[url] = image
+            ImageCache[self.url] = image
         }
-        return content(phase)
+        return self.content(phase)
     }
 }
 

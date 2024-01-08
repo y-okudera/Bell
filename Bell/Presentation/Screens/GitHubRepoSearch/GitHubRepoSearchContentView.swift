@@ -18,8 +18,8 @@ struct GitHubRepoSearchContentView: View {
         viewModel: GitHubRepoSearchViewModel,
         dismissSearchTrigger: Binding<Bool>
     ) {
-        self._viewModel = .init(wrappedValue: viewModel)
-        self._dismissSearchTrigger = dismissSearchTrigger
+        _viewModel = .init(wrappedValue: viewModel)
+        _dismissSearchTrigger = dismissSearchTrigger
     }
 
     var body: some View {
