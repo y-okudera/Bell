@@ -27,6 +27,7 @@
 		B6CDB60E2B4AFF62005FB70E /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDB60D2B4AFF61005FB70E /* Tab.swift */; };
 		B6CDB6102B4BCEB9005FB70E /* GitHubRepoLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDB60F2B4BCEB9005FB70E /* GitHubRepoLoadingState.swift */; };
 		B6CDB6122B4BCFCF005FB70E /* GitHubUserLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDB6112B4BCFCF005FB70E /* GitHubUserLoadingState.swift */; };
+		B6CDB6152B4BF4B0005FB70E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B6CDB6142B4BF4B0005FB70E /* Localizable.xcstrings */; };
 		B6D200AE2B4509C300797816 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200AD2B4509C300797816 /* Dialog.swift */; };
 		B6D200B02B450D1600797816 /* DialogModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200AF2B450D1600797816 /* DialogModifier.swift */; };
 		B6D200B32B45244700797816 /* RepositoryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D200B22B45244700797816 /* RepositoryListItem.swift */; };
@@ -75,6 +76,7 @@
 		B6CDB60D2B4AFF61005FB70E /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		B6CDB60F2B4BCEB9005FB70E /* GitHubRepoLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoLoadingState.swift; sourceTree = "<group>"; };
 		B6CDB6112B4BCFCF005FB70E /* GitHubUserLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserLoadingState.swift; sourceTree = "<group>"; };
+		B6CDB6142B4BF4B0005FB70E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B6D200AD2B4509C300797816 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		B6D200AF2B450D1600797816 /* DialogModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogModifier.swift; sourceTree = "<group>"; };
 		B6D200B22B45244700797816 /* RepositoryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListItem.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		B60061C22B41DAC00099DA39 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B6CDB6132B4BF499005FB70E /* Resources */,
 				B6D200AB2B45099D00797816 /* Components */,
 				B60061922B41C9FD0099DA39 /* Preview Content */,
 				B60061C32B4245600099DA39 /* Screens */,
@@ -239,6 +242,14 @@
 				B6CDB60B2B4A5558005FB70E /* TabViewModel.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		B6CDB6132B4BF499005FB70E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDB6142B4BF4B0005FB70E /* Localizable.xcstrings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		B6D200AB2B45099D00797816 /* Components */ = {
@@ -395,6 +406,7 @@
 			files = (
 				B60061942B41C9FD0099DA39 /* Preview Assets.xcassets in Resources */,
 				B60061912B41C9FD0099DA39 /* Assets.xcassets in Resources */,
+				B6CDB6152B4BF4B0005FB70E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,7 @@ final class GitHubRepoSearchViewModel: ObservableObject {
     private var repositoryCount: Int = 0
 
     var navigationTitle: String {
-        self.searchedText.isEmpty ? "Repositories" : "\(self.searchedText): \(String.localizedStringWithFormat("%d", self.repositoryCount))"
+        self.searchedText.isEmpty ? String(localized: "Repositories") : String(localized: "\(self.searchedText): \(String.localizedStringWithFormat("%d", self.repositoryCount))")
     }
 
     func onChooseRecommendedKeyword(_ keyword: String) {
@@ -114,18 +114,18 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         case let .gqlError(errors: errors):
             logger.error("\(errors)")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search Repository",
-                message: "A GraphQL error has occurred.\n\n" + errors.map { $0.localizedDescription }.joined(separator: "\n\n"),
-                buttonText: "Close",
+                title: String(localized: "Failed to Search Repository"),
+                message: String(localized: "A GraphQL error has occurred.\n\n\(errors.map { $0.localizedDescription }.joined(separator: "\n\n"))"),
+                buttonText: String(localized: "Close"),
                 handler: nil
             ))
         case let .networkError(error: error):
             logger.error("\(error)")
             self.dialog = .confirm(viewData: .init(
-                title: "Failed to Search Repository",
-                message: "Please check your network connection and try again.",
-                primaryButtonText: "Retry",
-                secondaryButtonText: "Cancel",
+                title: String(localized: "Failed to Search Repository"),
+                message: String(localized: "Please check your network connection and try again."),
+                primaryButtonText: String(localized: "Retry"),
+                secondaryButtonText: String(localized: "Cancel"),
                 primaryButtonHandler: { [weak self] in
                     if isAdditionalRequest {
                         self?.performAdditionalRequest()
@@ -138,9 +138,9 @@ final class GitHubRepoSearchViewModel: ObservableObject {
         case .unknownError:
             logger.error("GraphQLError.unknownError:")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search Repository",
-                message: "An unknown error has occurred.",
-                buttonText: "Close",
+                title: String(localized: "Failed to Search Repository"),
+                message: String(localized: "An unknown error has occurred."),
+                buttonText: String(localized: "Close"),
                 handler: nil
             ))
         }

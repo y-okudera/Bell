@@ -1,0 +1,67 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "A GraphQL error has occurred.\n\n%@" : {
+
+    },
+    "An unknown error has occurred." : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Close" : {
+
+    },
+    "Failed to Search Repository" : {
+
+    },
+    "Failed to Search User" : {
+
+    },
+    "No repositories found.\nPlease try searching with another keyword." : {
+
+    },
+    "No users found.\nPlease try searching with another keyword." : {
+
+    },
+    "Please check your network connection and try again." : {
+
+    },
+    "Recommended for You" : {
+
+    },
+    "RepoSearch" : {
+
+    },
+    "Repositories" : {
+
+    },
+    "Retry" : {
+
+    },
+    "Search Repositories" : {
+
+    },
+    "Search Users" : {
+
+    },
+    "Users" : {
+
+    },
+    "UserSearch" : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -25,7 +25,7 @@ final class GitHubUserSearchViewModel: ObservableObject {
     private var userCount: Int = 0
 
     var navigationTitle: String {
-        self.searchedText.isEmpty ? "Users" : "\(self.searchedText): \(String.localizedStringWithFormat("%d", self.userCount))"
+        self.searchedText.isEmpty ? String(localized: "Users") : String(localized: "\(self.searchedText): \(String.localizedStringWithFormat("%d", self.userCount))")
     }
 
     func onChooseRecommendedKeyword(_ keyword: String) {
@@ -114,18 +114,18 @@ final class GitHubUserSearchViewModel: ObservableObject {
         case let .gqlError(errors: errors):
             logger.error("\(errors)")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search User",
-                message: "A GraphQL error has occurred.\n\n" + errors.map { $0.localizedDescription }.joined(separator: "\n\n"),
-                buttonText: "Close",
+                title: String(localized: "Failed to Search User"),
+                message: String(localized: "A GraphQL error has occurred.\n\n\(errors.map { $0.localizedDescription }.joined(separator: "\n\n"))"),
+                buttonText: String(localized: "Close"),
                 handler: nil
             ))
         case let .networkError(error: error):
             logger.error("\(error)")
             self.dialog = .confirm(viewData: .init(
-                title: "Failed to Search User",
-                message: "Please check your network connection and try again.",
-                primaryButtonText: "Retry",
-                secondaryButtonText: "Cancel",
+                title: String(localized: "Failed to Search User"),
+                message: String(localized: "Please check your network connection and try again."),
+                primaryButtonText: String(localized: "Retry"),
+                secondaryButtonText: String(localized: "Cancel"),
                 primaryButtonHandler: { [weak self] in
                     if isAdditionalRequest {
                         self?.performAdditionalRequest()
@@ -138,9 +138,9 @@ final class GitHubUserSearchViewModel: ObservableObject {
         case .unknownError:
             logger.error("GraphQLError.unknownError:")
             self.dialog = .alert(viewData: .init(
-                title: "Failed to Search User",
-                message: "An unknown error has occurred.",
-                buttonText: "Close",
+                title: String(localized: "Failed to Search User"),
+                message: String(localized: "An unknown error has occurred."),
+                buttonText: String(localized: "Close"),
                 handler: nil
             ))
         }
