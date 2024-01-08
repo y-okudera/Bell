@@ -24,61 +24,49 @@ struct GitHubRepoSearchContentView: View {
 
     var body: some View {
         Group {
-            if self.viewModel.isInitialLoading {
-                CircularProgressView()
-            } else if self.isSearching || self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
-                List {
-                    Section("Recommended for You") {
-                        ForEach(["iOS", "Swift", "SwiftUI", "GraphQL", "Clean Architecture"], id: \.self) { text in
-                            Button(text) {
-                                self.viewModel.onChooseRecommendedKeyword(text)
-                            }
-                            .buttonStyle(DefaultButtonStyle())
-                        }
-                    }
-                    .headerProminence(.increased)
-                }
-                .simultaneousGesture(
-                    DragGesture()
-                        .onChanged { _ in
-                            self.dismissSearch()
-                            self.dismissSearchTrigger = false
-                        }
-                )
-            } else if !self.viewModel.didSearchText.isEmpty && self.viewModel.data.isEmpty {
-                Text("No repositories found.\nPlease try searching with another keyword.")
+            if isSearching {
+                self.recommendedKeywordsList()
             } else {
-                ScrollViewReader(content: { proxy in
-                    List {
-                        ForEach(self.viewModel.data, id: \.id) { data in
-                            RepositoryListItem(repository: data)
-                                .id(self.viewModel.data.first?.id == data.id ? "top" : nil)
-                                .listRowInsets(EdgeInsets())
-                                .onAppear {
-                                    self.viewModel.onAppearItem(itemData: data)
-                                }
+                switch self.viewModel.loadingState {
+                case .idle:
+                    self.recommendedKeywordsList()
+                case .initialLoading:
+                    CircularProgressView()
+                case .emptyState:
+                    Text("No repositories found.\nPlease try searching with another keyword.")
+                case let .loaded(repositories, isAdditionalLoading):
+                    ScrollViewReader(content: { proxy in
+                        List {
+                            ForEach(repositories, id: \.id) { repo in
+                                RepositoryListItem(repository: repo)
+                                    .id(repositories.first?.id == repo.id ? "top" : nil)
+                                    .listRowInsets(.init())
+                                    .onAppear {
+                                        self.viewModel.onAppearItem(itemData: repo)
+                                    }
+                            }
+                            if isAdditionalLoading {
+                                CircularProgressView(id: "loading_\(UUID().uuidString)")
+                            }
                         }
-                        if self.viewModel.isAdditionalLoading {
-                            CircularProgressView(id: "loading_\(UUID().uuidString)")
+                        .onChange(of: self.tabViewModel.activeTabTapped[.repoSearch]) {
+                            withAnimation {
+                                proxy.scrollTo("top", anchor: .top)
+                            }
                         }
-                    }
-                    .onChange(of: self.tabViewModel.activeTabTapped[.repoSearch]) {
-                        withAnimation {
-                            proxy.scrollTo("top", anchor: .top)
-                        }
-                    }
-                })
+                    })
+                }
             }
         }
         .onAppear {
             defer {
                 self.dismissSearchTrigger = false
             }
-            if dismissSearchTrigger {
+            if self.dismissSearchTrigger {
                 self.dismissSearch()
             }
         }
-        .onChange(of: dismissSearchTrigger, { _, newValue in
+        .onChange(of: self.dismissSearchTrigger, { _, newValue in
             defer {
                 self.dismissSearchTrigger = false
             }
@@ -86,6 +74,28 @@ struct GitHubRepoSearchContentView: View {
                 self.dismissSearch()
             }
         })
+    }
+
+    @ViewBuilder
+    private func recommendedKeywordsList() -> some View {
+        List {
+            Section("Recommended for You") {
+                ForEach(["iOS", "Swift", "SwiftUI", "GraphQL", "Clean Architecture"], id: \.self) { text in
+                    Button(text) {
+                        self.viewModel.onChooseRecommendedKeyword(text)
+                    }
+                    .buttonStyle(DefaultButtonStyle())
+                }
+            }
+            .headerProminence(.increased)
+        }
+        .simultaneousGesture(
+            DragGesture()
+                .onChanged { _ in
+                    self.dismissSearch()
+                    self.dismissSearchTrigger = false
+                }
+        )
     }
 }
 
