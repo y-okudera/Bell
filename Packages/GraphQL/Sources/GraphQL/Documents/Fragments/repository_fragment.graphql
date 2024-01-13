@@ -1,0 +1,14 @@
+fragment RepositoryFragment on Repository {
+  id
+  url
+  description
+  homepageUrl
+  nameWithOwner
+  owner {
+    ...UserFragment
+  }
+  stargazerCount
+  primaryLanguage {
+    ...LanguageFragment
+  }
+}

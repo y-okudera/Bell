@@ -1,0 +1,24 @@
+query Search(
+  $after: String
+  $first: Int
+  $query: String!
+  $searchType: SearchType!
+) {
+  search(after: $after, first: $first, query: $query, type: $searchType) {
+    edges {
+      cursor
+      node {
+        ...RepositoryFragment
+        ...UserFragment
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+    repositoryCount
+    userCount
+  }
+}

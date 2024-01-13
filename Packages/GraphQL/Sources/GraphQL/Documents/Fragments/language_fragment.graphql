@@ -1,0 +1,5 @@
+fragment LanguageFragment on Language {
+  id
+  name
+  color
+}
