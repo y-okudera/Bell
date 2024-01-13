@@ -1,0 +1,7 @@
+fragment UserFragment on User {
+  id
+  avatarUrl
+  login
+  resourcePath
+  url
+}
